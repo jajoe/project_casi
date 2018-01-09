@@ -19,12 +19,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-// to test : curl -H "Conte-Type: application/json" -X POST -d '{"idProxy":"xxxBOBxxx","result":"2"}' http://localhost:4242/answer
+// to test : curl -H "Conte-Type: application/json" -X POST -d '{"idProxy":"xxxBOBxxx","result":"2","time":"0.002"}' http://localhost:4242/answer
 
 app.post('/answer', function (req, res) {
   if (req.body){
-    if (req.body.idProxy && req.body.result) {
-      fs.writeFile(pathFile + req.body.idProxy + ".txt", req.body.result, function(err) {
+    if (req.body.idProxy && req.body.result && req.body.time) {
+      fs.writeFile(pathFile + req.body.idProxy + ".txt", req.body.result + ";" + req.body.time, function(err) {
         if(err) {
           res.status(400).send("Error while writing in the file : "+err);
         } else {
@@ -32,7 +32,7 @@ app.post('/answer', function (req, res) {
         }
       });
     } else {
-      res.status(400).send("Field idProxy or/and result missing");
+      res.status(400).send("Field idProxy or/and result or/and time missing");
     }
   } else {
     res.status(400).send('Problem with the body of your request : there is no body');
