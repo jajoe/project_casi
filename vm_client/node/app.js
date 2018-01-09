@@ -28,6 +28,7 @@ app.post('/answer', function (req, res) {
         if(err) {
           res.status(400).send("Error while writing in the file : "+err);
         } else {
+          console.log(req.body);
           res.send('OK');
         }
       });
