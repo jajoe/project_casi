@@ -17,7 +17,7 @@ def sendTweet(tweet):
     idProxy = createIdProxy()
     data = {"idProxy": idProxy,"tweet": tweet, "uri":"http://localhost:4242/answer"}
 
-    req = urllib2.Request("http://localhost:10042/tweet")
+    req = urllib2.Request("http://10.0.2.15:10042/tweet")
     req.add_header('Content-Type', 'application/json')
 
     res = urllib2.urlopen(req, json.dumps(data))
